@@ -9,9 +9,9 @@ use crate::syntax::Spanned;
 /// A color in a specific color space.
 ///
 /// Typst supports:
-/// - sRGB through the [`rgb` function]($rgb)
-/// - Device CMYK through [`cmyk` function]($cmyk)
-/// - D65 Gray through the [`luma` function]($luma)
+/// - sRGB through the [`rgb` function]($color.rgb)
+/// - Device CMYK through [`cmyk` function]($color.cmyk)
+/// - D65 Gray through the [`luma` function]($color.luma)
 ///
 /// Typst provides the following built-in colors:
 ///
@@ -194,9 +194,9 @@ impl Color {
         self.to_rgba().to_array()
     }
 
-    /// Converts this color to Digital CMYK and returns its components
-    /// (C, M, Y, K) as an array of [ratios]($ratio). Note that this function
-    /// will throw an error when applied to an [rgb]($rgb) color, since its
+    /// Converts this color to Digital CMYK and returns its components (C, M, Y,
+    /// K) as an array of [ratios]($ratio). Note that this function will throw
+    /// an error when applied to an [rgb]($color.rgb) color, since its
     /// conversion to CMYK is not available.
     #[func]
     pub fn to_cmyk(self) -> StrResult<Array> {
@@ -209,9 +209,9 @@ impl Color {
         }
     }
 
-    /// If this color was created with [luma]($luma), returns the
-    /// [integer]($int) value used on construction. Otherwise (for [rgb]($rgb)
-    /// and [cmyk]($cmyk) colors), throws an error.
+    /// If this color was created with [luma]($color.luma), returns the
+    /// [integer]($int) value used on construction. Otherwise (for
+    /// [rgb]($color.rgb) and [cmyk]($color.cmyk) colors), throws an error.
     #[func]
     pub fn to_luma(self) -> StrResult<u8> {
         match self {
